@@ -1,0 +1,10 @@
+# Dossiers
+node_modules/
+build/
+dist/
+
+# Fichiers
+.env
+*.log
+*.swp
+.DS_Store
