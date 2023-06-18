@@ -31,56 +31,6 @@ mongoose.connect(process.env.DB_HOST)
     console.log("DB error");
 });
 
-// Partie authentification
-
-// app.use(passport.initialize());
-
-// app.use(passport.session());
-
-/*passport.serializeUser((user, done) => {
-    done(null, user.id)
-});
-
-passport.deserializeUser((id, done) => {
-    User.findById(id)
-    .then(user => {
-        done(null, user);
-    }).catch(err => {
-        done(err, null);
-    });
-});
-
-passport.use(new localStrategy((username, password, done) => {
-    User.findOne({ name: username })
-    .then(user => {
-        if (!user) {
-            return done(null, false, { message: "Nom d'utilisateur incorrect." });
-        }
-        bcrypt.compare(password, user.password)
-        .then(result => {
-            if (result === false) {
-                return done(null, false, { message: "Mot de passe incorrect." });
-            }
-            return done(null, user);
-        }).catch(err => done(err));
-    }).catch(err => done(err));
-}));
-*/
-
-/*app.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) {
-            console.log(err);
-            // return res.redirect('/admin'); // ou gérer l'erreur d'une autre manière
-            res.json({error: "Erreur lors de la déconnexion"});
-        }
-        // res.redirect('/loginView');
-        res.json({success: "Vous etes déconnecté"});
-    });
-    // res.redirect('/loginView');
-    res.json({success: "Vous etes déconnecté"});
-});*/
-
 // Mes routes
 
 app.get('/', (req, res) => {
@@ -100,6 +50,13 @@ app.use('/food', foodRoute);
 const authRoute = require('./routes/authRoute');
 
 app.use('/auth', authRoute);
+
+// Routes liés aux commandes
+
+const orderRoute = require('./routes/orderRoute');
+
+app.use('/order', orderRoute);
+
 
 
 // console.log(mesRoutes(app));

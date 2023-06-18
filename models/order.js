@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const Schema  = mongoose.Schema;
 
 const orderSchema = new Schema({
     userInfo: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    total_price: {
+    foodInfo: {
+        type: Schema.Types.ObjectId,
+        ref: 'Food',
+        required: true
+    },
+    price: {
         type: Number,
         required: true,
         min: 500,
@@ -17,15 +23,14 @@ const orderSchema = new Schema({
             message: (props) => "Montant invalide"
         }
     },
+    quantite: {
+        type: Number,
+        required: true
+    },
     id_order: {
         type: String,
         required: true,
         minlength: 5
-    },
-    adresse: {
-        type: String,
-        required: true,
-        minlength: 3
     },
     statut: {
         type: String,
