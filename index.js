@@ -22,10 +22,13 @@ app.use(cors({
 
 dotenv.config();
 
-mongoose.connect(process.env.DB_HOST)
+const { DB_HOST, SERVER_PORT } = process.env;
+
+
+mongoose.connect(DB_HOST)
 .then(() => {
-    app.listen(process.env.SERVER_PORT);
-    console.log(`Le serveur est au port ${process.env.SERVER_PORT}`);
+    app.listen(SERVER_PORT);
+    console.log(`Le serveur est au port ${SERVER_PORT}`);
     console.log("Connected successfully to the DB");
 }).catch((err) => {
     console.log("DB error");

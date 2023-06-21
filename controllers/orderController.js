@@ -3,14 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const add_order = (req, res) => {
     const uniqId = uuidv4();
-    // const newData = (req.body.panier).map((element) => ({
-    //     price: element.price,
-    //     quantite: element.quantite,
-    //     foodInfo: element._id,
-    //     userInfo: req.body.userInfo,
-    //     id_order: uniqId,
-    // }));
-    // const data = Object.assign({}, newData);
     const data = (req.body.panier).reduce((acc, element) => {
         acc.push({
             price: element.price,
@@ -21,7 +13,6 @@ const add_order = (req, res) => {
         });
         return acc;
     }, []);
-    console.log(data);
     Order.insertMany(data)
         .then((order) => {
             res.json({
